@@ -1,6 +1,7 @@
 *** Settings  *** 
 Library    SeleniumLibrary
 Library    XML
+Documentation  This file contains testcase of addtocart functionality
 *** Variables ***
 ${browser}   edge   
 ${url}      https://www.saucedemo.com/ 
@@ -11,9 +12,8 @@ ${url}      https://www.saucedemo.com/
 
 saucedemo test     Open Browser  ${url}  ${browser}
                Maximize Browser Window
-               Input Text   xpath=//input[@id='user-name']  standard_user
-               Input Text    //input[@id='password']    secret_sauce
-               Click Button    //input[@id='login-button']
+               Enter username password click     standard_user     secret_sauce
+               
                Select From List By Index    //select[@class='product_sort_container']    2  
                Click Button    //button[@id='add-to-cart-sauce-labs-onesie'] 
                Click Link    //a[@class='shopping_cart_link'] 
@@ -28,3 +28,8 @@ saucedemo test     Open Browser  ${url}  ${browser}
                Sleep    3s
                close Browser
 *** Keywords ***
+Enter username password click
+    [Arguments]  ${username}  ${password}
+     Input Text   xpath=//input[@id='user-name']  standard_user
+      Input Text    //input[@id='password']    secret_sauce
+      Click Button    //input[@id='login-button']
